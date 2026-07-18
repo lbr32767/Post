@@ -21,6 +21,15 @@ order: 0
 
 你可以使用 **粗体**、*斜体*、~~删除线~~ 和 `行内代码` 来强调文本。
 
+**示例代码：**
+
+```markdown
+**这是粗体文本**
+*这是斜体文本*
+~~这是删除线文本~~
+`这是行内代码`
+```
+
 ### 列表
 
 **无序列表：**
@@ -34,6 +43,18 @@ order: 0
 1. 第一步
 2. 第二步
 3. 第三步
+
+**示例代码：**
+
+```markdown
+- 第一项
+- 第二项
+- 第三项
+
+1. 第一步
+2. 第二步
+3. 第三步
+```
 
 ### 代码块
 
@@ -58,37 +79,130 @@ const greet = (user: User): string => {
 };
 ```
 
+**示例代码：**
+
+````markdown
+```javascript
+function hello() {
+  console.log('Hello, World!');
+}
+```
+
+```typescript
+interface User {
+  name: string;
+  email: string;
+}
+```
+````
+
 ### 引用
 
 > 这是一段引用文字，可以用来强调重要信息或引用他人的话语。
+
+**示例代码：**
+
+```markdown
+> 这是一段引用文字，可以用来强调重要信息或引用他人的话语。
+```
 
 ### 链接
 
 访问 [Astro 官网](https://astro.build) 了解更多信息。
 
+**示例代码：**
+
+```markdown
+[链接文本](https://example.com)
+```
+
 ## 第二部分：MDX 高级特性
 
 ### 什么是 MDX？
 
-MDX 是 Markdown 的扩展，允许你在 Markdown 文件中嵌入 JSX 组件。这使得你可以创建更加丰富和交互性强的内容。
+MDX 是 Markdown 的扩展，允许你在 Markdown 文件中嵌入组件。在 Astro 中，你可以使用 Svelte、Vue、React 等多种框架的组件。
 
-### 组件示例
+**示例代码：**
 
-MDX 允许你在 Markdown 中直接使用 JSX 组件，例如：
+```mdx
+---
+title: '我的 MDX 文章'
+pubDate: 2026-07-18
+---
 
-<div style={{ padding: '1rem', backgroundColor: '#f0f9ff', borderLeft: '4px solid #3b82f6', margin: '1rem 0' }}>
-  <strong>提示：</strong>这是一个使用内联样式的示例！MDX 让你可以在 Markdown 中直接使用 JSX。
+# 标题
+
+这是一篇 MDX 文章，可以在这里使用 Svelte 组件！
+```
+
+### Svelte 组件示例
+
+可以直接在 MDX 中使用 框架 组件：
+
+<script>
+  import { onMount } from 'svelte';
+  let count = 0;
+  let message = '点击按钮增加计数';
+  
+  function increment() {
+    count += 1;
+    message = `已点击 ${count} 次`;
+  }
+</script>
+
+<div style="padding: 1rem; background: #f0f9ff; border-left: 4px solid #3b82f6; margin: 1rem 0;">
+  <p>{message}</p>
+  <button on:click={increment} style="padding: 0.5rem 1rem; background: #3b82f6; color: white; border: none; border-radius: 4px; cursor: pointer;">
+    点击次数: {count}
+  </button>
 </div>
+
+**示例代码：**
+
+```mdx
+---
+title: '我的 MDX 文章'
+---
+
+<script>
+  import Counter from '../src/components/Counter.svelte';
+  
+  let name = 'World';
+</script>
+
+# 你好 {name}!
+
+<Counter />
+```
 
 ### 动态内容
 
-通过 MDX，你可以轻松地在文章中嵌入动态组件，如：
+通过 MDX + 框架，你可以轻松地在文章中嵌入交互组件，如：
 
 - 交互式图表
 - 代码演示
 - 自定义提示框
+- 计数器、轮播图等
 
-> MDX 结合了 Markdown 的简洁性和 React 组件的强大功能。
+> MDX 结合了 Markdown 的简洁性和 框架 组件的强大功能。
+
+**示例代码：** Svelte
+
+```mdx
+---
+title: '交互式文章'
+---
+
+<script>
+  import { Chart } from '../src/components/Chart.svelte';
+  import { CodeDemo } from '../src/components/CodeDemo.svelte';
+  
+  const data = [1, 2, 3, 4, 5];
+</script>
+
+<Chart data={data} />
+<CodeDemo code="console.log('Hello!')" />
+```
 
 ## 结语
 
